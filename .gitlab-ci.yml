@@ -1,0 +1,22 @@
+# This file is a template, and might need editing before it works on your project.
+# Official Java image. Look for the different tagged releases at
+# https://hub.docker.com/r/library/java/tags/ . A Java image is not required
+# but an image with a JVM speeds up the build a bit.
+image: sbt:1.1.7
+
+before_script:
+#   # Install SBT
+#   - apt update
+#   - apt install sbt
+#   # Log the sbt version
+#   - sbt about
+
+build:
+  tags:
+  - common-load
+  script:
+  - sbt "gatling:testOnly com.github.mdsina.graaljs.load.tests.MaxPerfTest"
+  artifacts:
+    paths:
+    - target/gatling/*
+    - gatling.log
